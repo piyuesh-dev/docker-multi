@@ -16,9 +16,9 @@ after_success:
   - docker build -t piyuesh/multi-server ./server
   - docker build -t piyuesh/multi-worker ./worker
   # Log in to the docker CLI
-  # - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
-  # # Take those images and push them to docker hub
-  # - docker push piyuesh/multi-client
-  # - docker push piyuesh/multi-nginx
-  # - docker push piyuesh/multi-server
-  # - docker push piyuesh/multi-worker
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  # Take those images and push them to docker hub
+  - docker push piyuesh/multi-client
+  - docker push piyuesh/multi-nginx
+  - docker push piyuesh/multi-server
+  - docker push piyuesh/multi-worker
