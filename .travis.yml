@@ -1,0 +1,24 @@
+sudo: required
+language: generic
+
+services:
+  - docker
+
+before_install:
+  - docker build -t piyuesh/react-test -f ./client/Dockerfile.dev ./client
+
+script:
+  - docker run -e CI=true piyuesh/react-test npm test
+
+after_success:
+  - docker build -t piyuesh/multi-client ./client
+  - docker build -t piyuesh/multi-nginx ./nginx
+  - docker build -t piyuesh/multi-server ./server
+  - docker build -t piyuesh/multi-worker ./worker
+  # Log in to the docker CLI
+  # - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  # # Take those images and push them to docker hub
+  # - docker push piyuesh/multi-client
+  # - docker push piyuesh/multi-nginx
+  # - docker push piyuesh/multi-server
+  # - docker push piyuesh/multi-worker
